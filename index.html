@@ -4,760 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>张安 - 算法工程师</title>
-    <style>
-        /* 基础样式和重置 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        :root {
-            --primary-color: rgb(162, 56, 56);
-            --secondary-color: rgb(202, 125, 102);
-            --text-color: #333;
-            --light-bg: #f8f8f8;
-            --white: #fff;
-            --transition: all 0.3s ease;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-bg);
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Arial', sans-serif;
-            margin-bottom: 1rem;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        a:hover {
-            color: var(--secondary-color);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 10px 20px;
-            border-radius: 4px;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .btn:hover {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        .section-padding {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 50px;
-            height: 3px;
-            background: var(--primary-color);
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* 导航栏 */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transition: var(--transition);
-        }
-
-        .navbar-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            font-weight: 500;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            bottom: -5px;
-            left: 0;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-        }
-
-        .hamburger div {
-            width: 25px;
-            height: 3px;
-            background: var(--primary-color);
-            margin: 5px 0;
-            transition: var(--transition);
-        }
-
-        /* 首屏展示 */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('hero-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-        }
-
-        .hero-content h2 {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* 关于我 */
-        .about {
-            background-color: var(--white);
-        }
-
-        .about-container {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .about-img {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-        }
-
-        .about-img img {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            padding: 0 30px;
-        }
-
-        /* 专业经历 */
-        .experience {
-            background-color: var(--light-bg);
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 4px;
-            background-color: var(--primary-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -2px;
-        }
-
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-            box-sizing: border-box;
-            animation: fadeIn 1s ease;
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: var(--white);
-            border: 4px solid var(--secondary-color);
-            border-radius: 50%;
-            top: 15px;
-            z-index: 1;
-        }
-
-        .left {
-            left: 0;
-        }
-
-        .right {
-            left: 50%;
-        }
-
-        .left::after {
-            right: -10px;
-        }
-
-        .right::after {
-            left: -10px;
-        }
-
-        .content {
-            padding: 20px;
-            background-color: var(--white);
-            border-radius: 6px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .content h3 {
-            color: var(--primary-color);
-        }
-
-        .content .date {
-            color: var(--secondary-color);
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        /* 技能 */
-        .skills {
-            background-color: var(--white);
-        }
-
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-
-        .skills-box {
-            flex: 0 0 calc(33.333% - 30px);
-            margin: 15px;
-            padding: 20px;
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: var(--transition);
-        }
-
-        .skills-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .skills-box h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        .skill-bar {
-            margin-bottom: 15px;
-        }
-
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-
-        .skill-progress {
-            width: 100%;
-            height: 10px;
-            background-color: #e9e9e9;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .skill-progress-bar {
-            height: 100%;
-            border-radius: 5px;
-            background-color: var(--primary-color);
-            animation: progress 2s ease;
-        }
-
-        /* 项目展示 */
-        .projects {
-            background-color: var(--light-bg);
-        }
-
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background-color: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .project-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .project-info {
-            padding: 20px;
-        }
-
-        .project-info h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .project-info p {
-            margin-bottom: 15px;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .project-tag {
-            background-color: var(--light-bg);
-            color: var(--text-color);
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-
-        /* 教育背景 */
-        .education {
-            background-color: var(--white);
-        }
-
-        .education-container {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .education-box {
-            flex: 1;
-            min-width: 300px;
-            padding: 20px;
-            margin: 15px;
-            background-color: var(--light-bg);
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .education-box h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .education-box .degree {
-            font-style: italic;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-
-        .education-box .duration {
-            font-size: 14px;
-            color: #777;
-            margin-bottom: 15px;
-        }
-
-        /* 联系方式 */
-        .contact {
-            background-color: var(--light-bg);
-        }
-
-        .contact-container {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .contact-info {
-            flex: 1;
-            min-width: 300px;
-            padding: 20px;
-        }
-
-        .contact-info-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .contact-info-item i {
-            width: 40px;
-            height: 40px;
-            background-color: var(--primary-color);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-        }
-
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
-            padding: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        /* 页脚 */
-        .footer {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 30px 0;
-            text-align: center;
-        }
-
-        .social-links {
-            margin-bottom: 20px;
-        }
-
-        .social-links a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            margin: 0 10px;
-            line-height: 40px;
-            color: var(--white);
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-3px);
-        }
-
-        /* 动画 */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes progress {
-            from {
-                width: 0;
-            }
-            to {
-                width: var(--width);
-            }
-        }
-
-        /* 响应式设计 */
-        @media screen and (max-width: 991px) {
-            .section-padding {
-                padding: 60px 0;
-            }
-
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
-
-            .hero-content h2 {
-                font-size: 1.8rem;
-            }
-        }
-
-        @media screen and (max-width: 767px) {
-            .navbar-container {
-                padding: 15px 0;
-            }
-
-            .nav-links {
-                position: absolute;
-                right: 0;
-                top: 70px;
-                background-color: var(--white);
-                width: 100%;
-                flex-direction: column;
-                align-items: center;
-                padding: 20px 0;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-                transform: translateY(-150%);
-                transition: var(--transition);
-                z-index: 999;
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-            }
-
-            .nav-links li {
-                margin: 10px 0;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .timeline::after {
-                left: 31px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-
-            .timeline-item::after {
-                left: 21px;
-            }
-
-            .right {
-                left: 0;
-            }
-
-            .skills-box {
-                flex: 0 0 calc(50% - 30px);
-            }
-        }
-
-        @media screen and (max-width: 575px) {
-            .section-padding {
-                padding: 40px 0;
-            }
-
-            .section-title h2 {
-                font-size: 2rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero-content h2 {
-                font-size: 1.5rem;
-            }
-
-            .hero-content p {
-                font-size: 1rem;
-            }
-
-            .about-container, 
-            .contact-container {
-                flex-direction: column;
-            }
-
-            .about-img {
-                margin-bottom: 30px;
-            }
-
-            .skills-box {
-                flex: 0 0 100%;
-            }
-
-            .projects-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="container navbar-container">
-            <div class="logo">张安</div>
-            <ul class="nav-links">
-                <li><a href="#home">首页</a></li>
-                <li><a href="#about">关于我</a></li>
-                <li><a href="#experience">专业经历</a></li>
-                <li><a href="#skills">技能</a></li>
-                <li><a href="#projects">项目展示</a></li>
-                <li><a href="#education">教育背景</a></li>
-                <li><a href="#contact">联系方式</a></li>
-            </ul>
-            <div class="hamburger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">张安</div>
+                <ul class="nav-links">
+                    <li><a href="#hero">首页</a></li>
+                    <li><a href="#about">关于我</a></li>
+                    <li><a href="#experience">专业经历</a></li>
+                    <li><a href="#skills">技能</a></li>
+                    <li><a href="#projects">项目展示</a></li>
+                    <li><a href="#education">教育背景</a></li>
+                    <li><a href="#contact">联系方式</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <!-- 首屏展示 -->
-    <section id="home" class="hero">
-        <div class="container hero-content">
+    <section id="hero">
+        <div class="container">
             <h1>张安</h1>
-            <h2>算法工程师</h2>
-            <p>专注于无人机硬件性能优化、故障预测与诊断、多传感器数据融合算法开发，致力于通过创新算法提升硬件性能和环境感知能力。</p>
-            <a href="#contact" class="btn">联系我</a>
+            <p>算法工程师 | 人工智能专家 | 技术爱好者</p>
+            <a href="#contact" class="btn hero-btn">联系我</a>
         </div>
     </section>
 
     <!-- 关于我 -->
-    <section id="about" class="about section-padding">
+    <section id="about">
         <div class="container">
-            <div class="section-title">
-                <h2>关于我</h2>
-            </div>
-            <div class="about-container">
-                <div class="about-img">
-                    <img src="https://via.placeholder.com/400x500" alt="张安">
-                </div>
+            <h2>关于我</h2>
+            <div class="about-content">
                 <div class="about-text">
-                    <h3>个人简介</h3>
-                    <p>我是一名拥有丰富经验的算法工程师，专注于无人机硬件性能优化和故障诊断领域。我在大疆创新工作期间，成功开发了多项创新算法，显著提升了无人机的飞行稳定性和环境感知能力。</p>
-                    <p>在哈佛大学计算机技术专业的学习经历，为我打下了坚实的理论基础。我热爱解决复杂问题，尤其擅长将理论知识应用于实际工程中，创造出具有商业价值的技术解决方案。</p>
-                    <a href="#" class="btn">下载简历</a>
+                    <p>我是一名拥有丰富经验的算法工程师，专注于无人机硬件性能优化和人工智能领域的研究与实践。</p>
+                    <p>自2017年从哈佛大学计算机技术专业毕业后，我一直在算法设计和优化领域深耕，尤其是在无人机相关算法研究和应用方面积累了深厚的专业知识和实践经验。</p>
+                    <p>我热爱挑战和创新，致力于通过算法的优化和创新解决实际问题，为行业带来价值。我相信技术的力量可以改变世界，而我的目标是通过我的专业技能为技术进步做出贡献。</p>
+                    <a href="#contact" class="btn">查看我的简历</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://via.placeholder.com/500x500" alt="张安">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 专业经历 -->
-    <section id="experience" class="experience section-padding">
+    <section id="experience">
         <div class="container">
-            <div class="section-title">
-                <h2>专业经历</h2>
-            </div>
+            <h2>专业经历</h2>
             <div class="timeline">
                 <div class="timeline-item left">
-                    <div class="content">
-                        <div class="date">2021.07 - 至今</div>
-                        <h3>算法工程师 - 大疆创新</h3>
-                        <p><strong>无人机硬件性能优化项目</strong>：负责硬件性能优化算法开发，通过优化飞行控制算法，提升飞行器在复杂环境下的飞行稳定性25%。</p>
-                        <p><strong>硬件故障预测与诊断系统</strong>：设计并实现基于大数据分析与机器学习的硬件故障预测模型，使硬件故障预测准确率达80%。</p>
-                        <p><strong>新一代无人机硬件研发项目</strong>：开发多传感器数据融合算法，提升飞行器环境感知能力40%。</p>
-                        <p><strong>硬件测试与验证算法优化项目</strong>：设计自动化硬件测试算法，提高硬件测试效率30%。</p>
+                    <div class="timeline-content">
+                        <h3>大疆创新</h3>
+                        <h4>算法工程师 | 2021.07 - 至今</h4>
+                        <p><strong>无人机硬件性能优化项目：</strong> 负责硬件性能优化算法开发，通过优化飞行控制算法，提升飞行器在复杂环境下的飞行稳定性25%。</p>
+                        <p><strong>硬件故障预测与诊断系统研发：</strong>设计并实现基于大数据分析与机器学习的硬件故障预测模型，使硬件故障预测准确率达80%。</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>大疆创新</h3>
+                        <h4>算法工程师 | 2021.07 - 至今</h4>
+                        <p><strong>新一代无人机硬件研发项目：</strong>开发多传感器数据融合算法，提升飞行器环境感知能力40%。</p>
+                        <p><strong>硬件测试与验证算法优化项目：</strong>设计自动化硬件测试算法，提高硬件测试效率30%。</p>
                     </div>
                 </div>
             </div>
@@ -765,127 +81,137 @@
     </section>
 
     <!-- 技能 -->
-    <section id="skills" class="skills section-padding">
+    <section id="skills">
         <div class="container">
-            <div class="section-title">
-                <h2>技能</h2>
-            </div>
+            <h2>技能</h2>
             <div class="skills-container">
-                <div class="skills-box">
-                    <h3>语言能力</h3>
-                    <div class="skill-bar">
-                        <div class="skill-info">
-                            <span>英语</span>
-                            <span>流利</span>
+                <div class="skill-category">
+                    <h3>编程语言</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Python</span>
+                            <span>95%</span>
                         </div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--width: 90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-info">
-                            <span>粤语</span>
-                            <span>流利</span>
-                        </div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--width: 95%"></div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%;" data-width="95%"></div>
                         </div>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-info">
-                            <span>普通话</span>
-                            <span>母语</span>
-                        </div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--width: 100%"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skills-box">
-                    <h3>专业技能</h3>
-                    <div class="skill-bar">
-                        <div class="skill-info">
-                            <span>算法设计</span>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>C++</span>
                             <span>90%</span>
                         </div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--width: 90%"></div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%;" data-width="90%"></div>
                         </div>
                     </div>
-                    <div class="skill-bar">
-                        <div class="skill-info">
-                            <span>机器学习</span>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Java</span>
                             <span>85%</span>
                         </div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-bar">
-                        <div class="skill-info">
-                            <span>数据分析</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-progress">
-                            <div class="skill-progress-bar" style="--width: 80%"></div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%;" data-width="85%"></div>
                         </div>
                     </div>
                 </div>
-                <div class="skills-box">
-                    <h3>证书与资质</h3>
-                    <p>哈佛计算机研究学5级</p>
-                    <p>AI人工智能诺贝尔证</p>
-                    <p>汽车驾驶C级证书</p>
-                    <p>钢琴10级</p>
+                <div class="skill-category">
+                    <h3>专业技能</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>算法设计</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%;" data-width="95%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>机器学习</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%;" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>数据分析</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%;" data-width="85%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>语言能力</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>英语</span>
+                            <span>母语水平</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%;" data-width="100%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>粤语</span>
+                            <span>母语水平</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%;" data-width="100%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>普通话</span>
+                            <span>母语水平</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 0%;" data-width="100%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 项目展示 -->
-    <section id="projects" class="projects section-padding">
+    <section id="projects">
         <div class="container">
-            <div class="section-title">
-                <h2>项目展示</h2>
-            </div>
-            <div class="projects-container">
+            <h2>项目展示</h2>
+            <div class="projects-grid">
                 <div class="project-card">
-                    <img src="https://via.placeholder.com/400x250" alt="无人机硬件性能优化" class="project-img">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x200" alt="无人机硬件性能优化">
+                    </div>
                     <div class="project-info">
                         <h3>无人机硬件性能优化</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">算法设计</span>
-                            <span class="project-tag">飞行控制</span>
-                            <span class="project-tag">性能优化</span>
-                        </div>
                         <p>负责硬件性能优化算法开发，通过优化飞行控制算法，提升飞行器在复杂环境下的飞行稳定性25%。</p>
-                        <a href="#" class="btn">查看详情</a>
+                        <a href="#" class="project-link">查看项目详情</a>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://via.placeholder.com/400x250" alt="硬件故障预测与诊断系统" class="project-img">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x200" alt="硬件故障预测与诊断系统">
+                    </div>
                     <div class="project-info">
                         <h3>硬件故障预测与诊断系统</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">大数据分析</span>
-                            <span class="project-tag">机器学习</span>
-                            <span class="project-tag">故障预测</span>
-                        </div>
                         <p>设计并实现基于大数据分析与机器学习的硬件故障预测模型，使硬件故障预测准确率达80%。</p>
-                        <a href="#" class="btn">查看详情</a>
+                        <a href="#" class="project-link">查看项目详情</a>
                     </div>
                 </div>
                 <div class="project-card">
-                    <img src="https://via.placeholder.com/400x250" alt="新一代无人机硬件研发" class="project-img">
+                    <div class="project-image">
+                        <img src="https://via.placeholder.com/400x200" alt="新一代无人机硬件研发">
+                    </div>
                     <div class="project-info">
                         <h3>新一代无人机硬件研发</h3>
-                        <div class="project-tags">
-                            <span class="project-tag">传感器融合</span>
-                            <span class="project-tag">环境感知</span>
-                            <span class="project-tag">算法开发</span>
-                        </div>
-                        <p>开发多传感器数据融合算法，提升飞行器环境感知能力40%。</p>
-                        <a href="#" class="btn">查看详情</a>
+                        <p>开发多传感器数据融合算法，提升飞行器环境感知能力40%，为无人机在复杂环境中的自主飞行提供技术支撑。</p>
+                        <a href="#" class="project-link">查看项目详情</a>
                     </div>
                 </div>
             </div>
@@ -893,65 +219,84 @@
     </section>
 
     <!-- 教育背景 -->
-    <section id="education" class="education section-padding">
+    <section id="education">
         <div class="container">
-            <div class="section-title">
-                <h2>教育背景</h2>
-            </div>
+            <h2>教育背景</h2>
             <div class="education-container">
-                <div class="education-box">
-                    <h3>哈佛大学</h3>
-                    <div class="degree">计算机技术本科</div>
-                    <div class="duration">2017 - 2021</div>
-                    <p>在哈佛大学计算机技术专业学习期间，我系统地掌握了计算机科学的基础理论和技术方法，培养了扎实的编程能力和解决复杂问题的能力。同时，积极参与各类科研项目，打下了坚实的算法研究基础。</p>
+                <div class="education-item">
+                    <div class="education-logo">
+                        哈佛大学
+                    </div>
+                    <div class="education-content">
+                        <h3>哈佛大学</h3>
+                        <h4>计算机技术 | 本科 | 2017 - 2021</h4>
+                        <p>在哈佛大学计算机技术专业学习期间，我系统地掌握了计算机科学和算法设计的理论基础，同时参与了多项算法研究项目，培养了扎实的算法思维和实践能力。毕业时获得了哈佛计算机研究学5级证书，为我日后从事算法工程师工作奠定了坚实的基础。</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 联系方式 -->
-    <section id="contact" class="contact section-padding">
+    <section id="contact">
         <div class="container">
-            <div class="section-title">
-                <h2>联系方式</h2>
-            </div>
+            <h2>联系方式</h2>
             <div class="contact-container">
                 <div class="contact-info">
-                    <div class="contact-info-item">
-                        <i>📱</i>
-                        <div>
-                            <h3>电话</h3>
-                            <p>13763388888</p>
+                    <h3>联系我</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>电话</h4>
+                                <p>13763388888</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>邮箱</h4>
+                                <p>184625671@qq.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>地址</h4>
+                                <p>广东省深圳市南山区科技园</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="contact-info-item">
-                        <i>✉️</i>
-                        <div>
-                            <h3>邮箱</h3>
-                            <p>184625671@qq.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-info-item">
-                        <i>📍</i>
-                        <div>
-                            <h3>地址</h3>
-                            <p>深圳</p>
-                        </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <h3>发送消息</h3>
+                    <form>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="您的姓名" required>
+                            <label for="name">姓名</label>
+                            <input type="text" id="name" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="您的邮箱" required>
+                            <label for="email">邮箱</label>
+                            <input type="email" id="email" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="主题">
+                            <label for="subject">主题</label>
+                            <input type="text" id="subject" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" placeholder="您的消息" required></textarea>
+                            <label for="message">消息</label>
+                            <textarea id="message" class="form-control" required></textarea>
                         </div>
                         <button type="submit" class="btn">发送消息</button>
                     </form>
@@ -961,83 +306,19 @@
     </section>
 
     <!-- 页脚 -->
-    <footer class="footer">
+    <footer>
         <div class="container">
             <div class="social-links">
-                <a href="#"><i>📘</i></a>
-                <a href="#"><i>🐦</i></a>
-                <a href="#"><i>📧</i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
             </div>
-            <p>&copy; 2023 张安. 保留所有权利.</p>
+            <p class="copyright">© 2023 张安. 保留所有权利.</p>
         </div>
     </footer>
 
-    <script>
-        // 导航栏响应式
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
-
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                
-                // 关闭移动端导航菜单
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
-
-        // 滚动时导航栏样式变化
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) {
-                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-            } else {
-                navbar.style.boxShadow = 'none';
-            }
-        });
-
-        // 技能进度条动画
-        function animateSkills() {
-            const skillsSection = document.querySelector('#skills');
-            const skillsBars = document.querySelectorAll('.skill-progress-bar');
-            
-            const skillsSectionTop = skillsSection.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (skillsSectionTop < windowHeight - 100) {
-                skillsBars.forEach(bar => {
-                    bar.style.width = bar.style.getPropertyValue('--width');
-                });
-            }
-        }
-
-        // 滚动时触发动画
-        window.addEventListener('scroll', animateSkills);
-        
-        // 当页面加载时检查是否需要显示技能动画
-        window.addEventListener('load', function() {
-            if (document.querySelector('#skills')) {
-                animateSkills();
-            }
-        });
-
-        // 表单提交处理
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('感谢您的留言！我会尽快回复您。');
-            this.reset();
-        });
-    </script>
+    <!-- Font Awesome 图标 -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 </html>
